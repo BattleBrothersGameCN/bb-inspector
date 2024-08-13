@@ -1,0 +1,37 @@
+{
+    "version": 5,
+    "configurePresets": [
+      {
+        "name": "default",
+        "binaryDir": "${sourceDir}/build/${hostSystemName}/",
+        "description": "This build is only available on Windows",
+        "generator": "Ninja",
+        "cacheVariables": {
+          "CMAKE_BUILD_TYPE": "Release",
+          "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/bin/",
+          "PORT": "Win"
+        },
+        "environment": {
+          "CC": "clang-cl",
+          "CXX": "clang-cl"
+        },
+        "condition": {
+          "type": "equals",
+          "lhs": "${hostSystemName}",
+          "rhs": "Windows"
+        }
+      }
+    ],
+    "buildPresets": [
+      {
+        "name": "default",
+        "configurePreset": "default",
+        "configuration": "Release",
+        "condition": {
+          "type": "equals",
+          "lhs": "${hostSystemName}",
+          "rhs": "Windows"
+        }
+      }
+    ]
+}
